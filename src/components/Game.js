@@ -68,7 +68,6 @@ const Game = ({ numberOfLetters }) => {
 
         if (!checkForDuplication(showCheckedWords, selectedWord)) {
           console.log("SAME!");
-          // setInitialTimeDone(initialTimeDone - 5000);
         } else {
           setShowCheckedWords([
             ...showCheckedWords,
@@ -125,10 +124,18 @@ const Game = ({ numberOfLetters }) => {
       </div>
       <ShowCheckedWords showCheckedWords={showCheckedWords} />
       <ShowSelectedLetters selectedLetters={selectedLetters} />
-      <button style={{ margin: "10px 0" }} onClick={checkWord}>
+      <button
+        style={{ margin: "10px 0" }}
+        disabled={timeLeft < 0}
+        onClick={checkWord}
+      >
         SELECT WORD
       </button>
-      <button style={{ margin: "10px 0" }} onClick={reset}>
+      <button
+        style={{ margin: "10px 0" }}
+        disabled={timeLeft < 0}
+        onClick={reset}
+      >
         CLEAR
       </button>
     </div>
