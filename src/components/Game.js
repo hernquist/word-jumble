@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { number } from "prop-types";
 import axios from "axios";
 import { get } from "lodash";
@@ -20,6 +20,20 @@ const Game = ({ numberOfLetters }) => {
   const [showCheckedWords, setShowCheckedWords] = useState([]);
   const [wordFromApi, setWordFromApi] = useState("");
   const [gameScore, setGameScore] = useState(0);
+
+  const [initialTimeDone, setInitialTimeDone] = useState(
+    new Date().getTime() + 60000
+  );
+
+  const calculateTimeLeft = () => initialTimeDone - new Date().getTime();
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+  });
 
   const pushSelectedLetter = letter =>
     setSelectedLetters([...selectedLetters, letter]);
@@ -50,14 +64,11 @@ const Game = ({ numberOfLetters }) => {
           score = wordData.score;
         }
 
-        console.log(wordData);
-        console.log(word);
-        console.log(score);
-
         const success = word === selectedWord && word.length > 2 && score > 500;
 
         if (!checkForDuplication(showCheckedWords, selectedWord)) {
           console.log("SAME!");
+          // setInitialTimeDone(initialTimeDone - 5000);
         } else {
           setShowCheckedWords([
             ...showCheckedWords,
@@ -67,6 +78,8 @@ const Game = ({ numberOfLetters }) => {
           if (success) {
             const wordScore = getWordScore(selectedLetters);
             setGameScore(gameScore + wordScore);
+          } else {
+            setInitialTimeDone(initialTimeDone - 5000);
           }
         }
         setSelectedLetters([]);
@@ -80,6 +93,8 @@ const Game = ({ numberOfLetters }) => {
     setSelectedLetters([]);
     setWordFromApi({});
   };
+
+  const time = timeLeft > 0 ? `${Math.floor(timeLeft / 1000)}s` : " ";
 
   return (
     <div
@@ -100,6 +115,7 @@ const Game = ({ numberOfLetters }) => {
           // margin: "40px 0 0 0"
         }}
       >
+        <div style={{ margin: "0 20px", fontSize: "32px" }}>-{time}-</div>
         <ShowPlayersLetters
           letters={letters}
           setLetters={setLetters}
