@@ -1,4 +1,5 @@
 import React from "react";
+import { LETTERS } from "../letters";
 
 const updateLetters = (letters, index) =>
   letters.map((letter, i) =>
@@ -23,12 +24,13 @@ const ShowPlayersLetters = ({
         style={{
           fontSize: "32px",
           border: "1.5px solid cornflowerBlue",
-          padding: "8px",
-          margin: "4px",
-          borderRadius: "3px",
+          padding: "8px 8px 0",
+          margin: "4px 4px 0",
+          borderRadius: "8px",
           minWidth: "32px",
           textTransform: "uppercase",
-          background: letter.selected ? "lime" : "orange"
+          visibility: letter.selected ? "hidden" : "visible",
+          background: "orange"
         }}
         onClick={() => {
           setLetters(updateLetters(letters, i));
@@ -36,6 +38,16 @@ const ShowPlayersLetters = ({
         }}
       >
         {letter.value}
+        <div
+          style={{
+            fontSize: "12px",
+            position: "relative",
+            left: "16px",
+            bottom: "12px"
+          }}
+        >
+          {LETTERS[letter.value].points}
+        </div>
       </div>
     ))}
   </div>

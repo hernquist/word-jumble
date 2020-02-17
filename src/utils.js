@@ -1,4 +1,4 @@
-import { letters } from "./letters";
+import { LETTERS } from "./letters";
 
 const getLetterWeightTotal = letters =>
   Object.keys(letters).reduce((sum, letter) => sum + letters[letter].weight, 0);
@@ -23,9 +23,9 @@ const findRandomLetter = (letters, randomNumber) =>
   );
 
 const returnRandomLetter = () => {
-  const weightTotal = getLetterWeightTotal(letters);
+  const weightTotal = getLetterWeightTotal(LETTERS);
   const randomSample = Math.floor(Math.random() * weightTotal);
-  return findRandomLetter(letters, randomSample);
+  return findRandomLetter(LETTERS, randomSample);
 };
 
 const setInitialLetters = totalLetters =>
@@ -34,4 +34,18 @@ const setInitialLetters = totalLetters =>
     selected: false
   }));
 
-export { returnRandomLetter, setInitialLetters };
+const makeWord = letters => letters.map(letter => letter.value).join("");
+
+const getWordScore = letters =>
+  letters.reduce((score, letter) => LETTERS[letter.value].points + score, 0);
+
+const checkForDuplication = (list, selectedWord) =>
+  list.every(listItem => makeWord(listItem.word) !== selectedWord);
+
+export {
+  returnRandomLetter,
+  setInitialLetters,
+  makeWord,
+  getWordScore,
+  checkForDuplication
+};
