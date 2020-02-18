@@ -6,8 +6,9 @@ const ShowSelectedLetters = ({ selectedLetters = [] }) => (
     style={{
       display: "flex",
       flexDirection: "row",
-      justifyContent: "spaceBetween",
-      margin: "20px 0 0 0"
+      justifyContent: "center",
+      margin: "20px 0 0 0",
+      width: "413px"
     }}
   >
     {selectedLetters.map((letter, i) => (

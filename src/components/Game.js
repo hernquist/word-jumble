@@ -70,8 +70,8 @@ const Game = ({ numberOfLetters }) => {
           console.log("SAME!");
         } else {
           setShowCheckedWords([
-            ...showCheckedWords,
-            { success, word: selectedLetters }
+            { success, word: selectedLetters },
+            ...showCheckedWords
           ]);
 
           if (success) {
@@ -91,9 +91,11 @@ const Game = ({ numberOfLetters }) => {
   const reset = () => {
     setSelectedLetters([]);
     setWordFromApi({});
+    setLetters(resetLetterStatuses(letters));
   };
 
   const time = timeLeft > 0 ? `${Math.floor(timeLeft / 1000)}s` : " ";
+  const lowOnTime = timeLeft < 5000 && timeLeft > 0;
 
   return (
     <div
@@ -109,35 +111,63 @@ const Game = ({ numberOfLetters }) => {
         style={{
           display: "flex",
           flexDirection: "row",
-          // justifyContent: "center",
           alignItems: "center"
-          // margin: "40px 0 0 0"
         }}
       >
-        <div style={{ margin: "0 20px", fontSize: "32px" }}>-{time}-</div>
+        <div
+          style={{
+            margin: "0 20px",
+            fontSize: "32px",
+            color: lowOnTime ? "red" : "black",
+            width: "100px"
+          }}
+        >
+          -{time}-
+        </div>
         <ShowPlayersLetters
           letters={letters}
           setLetters={setLetters}
           pushSelectedLetter={pushSelectedLetter}
         />
-        <div style={{ margin: "0 20px", fontSize: "32px" }}>-{gameScore}-</div>
+        <div style={{ margin: "0 20px", fontSize: "32px", width: "100px" }}>
+          -{gameScore}-
+        </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          height: "80px"
+        }}
+      >
+        <button
+          style={{
+            margin: "auto 10px",
+            height: "30px",
+            borderRadius: "5px",
+            width: "95px"
+          }}
+          disabled={timeLeft < 0}
+          onClick={checkWord}
+        >
+          SELECT WORD
+        </button>
+        <ShowSelectedLetters selectedLetters={selectedLetters} />
+        <button
+          style={{
+            margin: "auto 10px",
+            height: "30px",
+            borderRadius: "5px",
+            width: "95px"
+          }}
+          disabled={timeLeft < 0}
+          onClick={reset}
+        >
+          CLEAR
+        </button>
       </div>
       <ShowCheckedWords showCheckedWords={showCheckedWords} />
-      <ShowSelectedLetters selectedLetters={selectedLetters} />
-      <button
-        style={{ margin: "10px 0" }}
-        disabled={timeLeft < 0}
-        onClick={checkWord}
-      >
-        SELECT WORD
-      </button>
-      <button
-        style={{ margin: "10px 0" }}
-        disabled={timeLeft < 0}
-        onClick={reset}
-      >
-        CLEAR
-      </button>
     </div>
   );
 };
