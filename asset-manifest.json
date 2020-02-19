@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/word-jumble/static/css/main.d1b05096.chunk.css",
+    "main.js": "/word-jumble/static/js/main.bfe96a22.chunk.js",
+    "main.js.map": "/word-jumble/static/js/main.bfe96a22.chunk.js.map",
+    "runtime-main.js": "/word-jumble/static/js/runtime-main.d6407103.js",
+    "runtime-main.js.map": "/word-jumble/static/js/runtime-main.d6407103.js.map",
+    "static/js/2.002ca734.chunk.js": "/word-jumble/static/js/2.002ca734.chunk.js",
+    "static/js/2.002ca734.chunk.js.map": "/word-jumble/static/js/2.002ca734.chunk.js.map",
+    "index.html": "/word-jumble/index.html",
+    "precache-manifest.74b2b50824dd80fb0d7a170c5345bf7b.js": "/word-jumble/precache-manifest.74b2b50824dd80fb0d7a170c5345bf7b.js",
+    "service-worker.js": "/word-jumble/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/word-jumble/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.002ca734.chunk.js.LICENSE.txt": "/word-jumble/static/js/2.002ca734.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d6407103.js",
+    "static/js/2.002ca734.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.bfe96a22.chunk.js"
+  ]
+}
